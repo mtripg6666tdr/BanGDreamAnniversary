@@ -2,11 +2,11 @@
 BanG Dream!の記念日のデータをまとめたもの。
 
 # 概要
-各記念日データはCSVでまとめています。
-場所は、`data/main.csv`です。
-CSVよりJSONの方が使いやすい場合が多いことを考えてJSONでも同じデータを利用できます。
+各記念日データはYamlでまとめています。
+場所は、`data.yaml`です。
+YamlよりJSONの方が使いやすい場合が多いことを考えてJSONでも同じデータを利用できます。
 場所は、`dist/main.json`です。
-CSVから自分でJSONに変換する場合には次のコマンドを使用します。
+Yamlから自分でJSONに変換する場合には次のコマンドを使用します。
 ```bash
 $ npm run build
 ```
@@ -17,16 +17,31 @@ $ npm run build
 ```
 $ npm install mtripg6666tdr/BanGDreamAnniversary
 ```
-### require構文
+### CommonJS
 ```javascript
-var data = require("BanGDreamAnniversary").load();
+const data = require("BanGDreamAnniversary");
 ```
-### module構文
+### ESModules
 ```javascript
-import BGA from "BanGDreamAnniversary";
-var data = BGA.load();
+import data from "BanGDreamAnniversary";
 ```
+
 ## 単純データファイルとして
-`data/main.csv`または`dist/main.json`をGitHubから直接ダウンロードして使用できます。
+`data.yaml`または`dist/main.json`をGitHubから直接ダウンロードして使用できます。
 ## データベースとして
 `https://raw.githubusercontent.com/mtripg6666tdr/BanGDreamAnniversary/master/dist/main.json`のURLからプログラム上でダウンロードして使えます。
+
+# アップデートについて
+(2023/06/23追記)
+* CSVでまとめていたものをYamlに変えました。互換性を考えて、JSONの場所は変えていません。
+* データ形式を変えました。
+  ```ts
+  { Name: string, ID: string, Month: string, Day: string }
+  ```
+  から、
+  ```ts
+  { name: string, id: number, month: number, date: number }
+  ```
+  になりました。
+  互換性のため暫くは前のデータも含まれています。
+* NPMパッケージとして使用する場合でも、`.load()`する必要がなくなりました。
